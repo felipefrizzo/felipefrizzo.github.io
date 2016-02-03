@@ -1,0 +1,44 @@
+baseurl = "http://felipefrizzo.github.io"
+title = "Felipe Frizzo"
+canonifyurls = true
+paginate = 10
+theme = "startbootstrap-clean-blog"
+languageCode = "en-us"
+copyright = "Copyright 2016, Felipe Frizzo; all rights reserved."
+
+[author]
+    name = "Felipe Frizzo"
+
+[params]
+    DateForm = "2 de Janeiro de 2006"
+    Author = "Felipe Frizzo"
+    email = "felipefrizzo@gmail.com"
+    Ganalytics = "XX-00000000-0"
+
+[[menu.main]]
+    name = "home"
+    url = "/"
+
+[[menu.main]]
+    name = "post"
+    url = "/post/"
+
+[[params.social]]
+    url = "http://github.com/felipefrizzo"
+    title = "github"
+
+[[params.social]]
+    url = "http://linkedin.com/in/felipefrizzo"
+    title = "linkedin"
+
+[[params.social]]
+    url = "https://plus.google.com/u/0/+felipefrizzo/"
+    title = "google-plus"
+
+[[params.social]]
+    url = "http://www.twitter.com/felipefrizzo"
+    title = "twitter"
+
+[[params.social]]
+    url = "http://facebook.com/felipefrizzo"
+    title = "facebook"

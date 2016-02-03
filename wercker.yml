@@ -1,0 +1,30 @@
+box: golang
+build:
+  steps:
+    - script:
+        name: setup hugo
+        code: go get github.com/spf13/hugo
+    - script:
+        name: build app
+        code: |
+              cd /pipeline/source
+              hugo
+deploy:
+  steps:
+    - install-packages:
+        packages: git ssh-client
+    - leipert/git-push:
+         gh_oauth: $GIT_TOKEN
+         repo: felipefrizzo/felipefrizzo.github.io
+         branch: master
+         basedir: ./public
+dev:
+  steps:
+    - script:
+        name: setup hugo
+        code: go get github.com/spf13/hugo
+    - script:
+        name: build app
+        code: |
+              cd /pipeline/source
+              hugo
