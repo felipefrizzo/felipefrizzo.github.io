@@ -6,7 +6,7 @@ tags = ["DevOps", "deploy", "heroku", "python", "django", "development"]
 title = "Wercker - Build e Deploy de maneira facil no Heroku"
 +++
 
-O que é o [Wercker](http://wercker.com) ?
+O que é o [Wercker](http://wercker.com)?
 
 Wercker é uma plataforma para facilitar as tarefas de build e deployment. A versão atual utiliza [Docker](http://docker.com) para executar seus builds, assim você pode usar o Wercker para fazer o build e deployment de qualquer linguagem basta utilizar uma imagem Docker e configurar os passos a serem executados pelo. Você pode customizar scripts para executar os passos tanto no build quanto no deployment assim evitando retrabalho quando precisar fazer o processo para outra aplicação que tenha a mesma estrutura.
 
