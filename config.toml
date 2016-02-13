@@ -10,7 +10,7 @@ copyright = "Copyright 2016, Felipe Frizzo; all rights reserved."
     name = "Felipe Frizzo"
 
 [params]
-    DateForm = "2 de Janeiro de 2006"
+    DateForm = "January 2, 2006"
     Author = "Felipe Frizzo"
     email = "felipefrizzo@gmail.com"
     Ganalytics = "XX-00000000-0"
