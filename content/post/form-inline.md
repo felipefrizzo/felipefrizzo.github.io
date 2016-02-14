@@ -40,7 +40,7 @@ from django import forms
 class OrderForms(forms.ModelForm):
     class Meta:
         model = Order
-        exclude = ['user', 'data']
+        exclude = ['data']
 
 
 class ItemOrderForms(forms.ModelForm):
