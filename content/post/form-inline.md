@@ -35,6 +35,7 @@ class ItemOrder(models.Model):
 ### forms.py
 ```python
 from django import forms
+from cadastro.models import Order, ItemOrder
 
 
 class OrderForms(forms.ModelForm):
@@ -53,6 +54,14 @@ Agora vamos criar a **views.py**, para exibir e renderizar o formulário para ad
 
 ### Views
 ```python
+from django.forms.models import inlineformset_factory
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render
+
+from cadastro.forms import OrderForms, ItemOrderForms
+from cadastro.models import Order, ItemOrder
+
+
 def order(request):
     order_forms = Order()
     item_order_formset = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms, extra=1, can_delete=False,
