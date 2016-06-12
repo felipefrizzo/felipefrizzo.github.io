@@ -1,15 +1,14 @@
 +++
-Categories = ["Django", "Python", "Inline", "Forms"]
-Description = ""
-Tags = ["django", "python", "inline", "forms", 'dynamic']
+Categories = ["Django", "Python", "Forms", "Inline", "CBV"]
+Tags = ["django", "python", "inline", "forms", 'dynamic', 'cbv']
 image = "/img/home-bg.jpg"
 author = "Felipe Frizzo"
-date = "2016-02-14T15:44:18-02:00"
-title = "Adicionar formulário dinâmicos com inlineforset_factory em uma aplicação Django"
+date = "2016-06-11T23:43:54-03:00"
+title = "Adicionar formulário dinâmicos com inlineforset_factory em uma aplicação Django usando Class-Based View"
 
 +++
 
-Esta é apenas uma explicação rápida de como usar inlineforset_factory no Django.
+Para complementar o POST anterior, decidi fazer uma explicação rápida de como usar inlineforset_factory com Class-Based View.
 
 ## Models e Forms
 
@@ -21,20 +20,23 @@ from django.db import models
 
 
 class Order(models.Model):
-    client = models.CharField()
+    client = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
 
 
 class ItemOrder(models.Model):
     order = models.ForeignKey('Order')
-    product = models.CharField()
+    product = models.CharField(max_length=255)
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=20, decimal_places=2)
 ```
+Diferente do exemplo anterior, o inlineforset_factory deve ser declarado dentro do formulário.
 
 ### forms.py
 ```python
 from django import forms
+from django.forms.models import inlineformset_factory
+
 from cadastro.models import Order, ItemOrder
 
 
@@ -48,57 +50,50 @@ class ItemOrderForms(forms.ModelForm):
     class Meta:
         model = ItemOrder
         exclude = ['order']
+
+ItemOrderFormSet = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms)
 ```
 
-Agora vamos criar a **views.py**, para exibir e renderizar o formulário para adicionar um Pedido com um ou vários Produtos.
+Agora vamos usar Class-Based View para mostrar o formulário e adicionar um Pedido com varios Itens.
 
-### Views
 ```python
-from django.forms.models import inlineformset_factory
-from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.views.generic import CreateView
+from django.shortcuts import redirect
 
-from cadastro.forms import OrderForms, ItemOrderForms
-from cadastro.models import Order, ItemOrder
+from cadastro.forms import OrderForms, ItemOrderFormSet
 
+class OrderView(CreateView):
+    template_name = 'order_view.html'
+    form_class = OrderForms
 
-def order(request):
-    order_forms = Order()
-    item_order_formset = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms, extra=1, can_delete=False,
-                                               min_num=1, validate_min=True)
+    def get_context_data(self, **kwargs):
+        context = super(OrderView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['forms'] = OrderForms(self.request.POST)
+            context['formset'] = ItemOrderFormSet(self.request.POST)
+        else:
+            context['forms'] = OrderForms()
+            context['formset'] = ItemOrderFormSet()
+        return context
 
-    if request.method == 'POST':
-        forms = OrderForms(request.POST, request.FILES, instance=order_forms, prefix='main')
-        formset = item_order_formset(request.POST, request.FILES, instance=order_forms, prefix='product')
-
+    def form_valid(self, form):
+        context = self.get_context_data()
+        forms = context['forms']
+        formset = context['formset']
         if forms.is_valid() and formset.is_valid():
-            forms = forms.save(commit=False)
+            self.object = form.save()
+            forms.instance = self.object
+            formset.instance = self.object
             forms.save()
             formset.save()
-            return HttpResponseRedirect('/pedido/')
-
-    else:
-        forms = OrderForms(instance=order_forms, prefix='main')
-        formset = item_order_formset(instance=order_forms, prefix='product')
-
-    context = {
-        'forms': forms,
-        'formset': formset,
-    }
-
-    return render(request, 'order.html', context)
+            return redirect('pedido')
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 ```
 
-* Instanciamos a classe Order
-* Instanciamos o inlineformset_factory
-    * *Order*: classe **PAI**.
-    * *ItemOrder*: class **FILHA**.
-    * *form=ItemOrderForm*: indica qual formulário a ser usado.
-    * *extra=1*: quantidade de *forms* a ser apresentado no *html* inicialmente.
-    * *can_delete=False*: ignora a opção de deletar o *form*.
-    * *min_num=1* e *validate_min=True*: o primeiro parametro seta uma quantidade mínima de *formlário*, o segundo habilita a validação do *formulário*.
-
 ## Template
+
+O template continua o mesmo do exemplo anterior.
 
 ```html
 {% extends 'base.html' %}

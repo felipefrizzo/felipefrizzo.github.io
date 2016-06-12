@@ -3,7 +3,7 @@ categories = ["DevOps", "Deploy", "Heroku", "Python", "Django"]
 date = "2016-02-03T21:37:12-02:00"
 image = "/img/home-bg.jpg"
 tags = ["DevOps", "deploy", "heroku", "python", "django", "development"]
-title = "Wercker - Build e Deploy de maneira facil no Heroku"
+title = "Wercker - Build e Deploy de maneira facil no Heroku de uma aplicação Python"
 +++
 
 O que é o [Wercker](http://wercker.com)?
