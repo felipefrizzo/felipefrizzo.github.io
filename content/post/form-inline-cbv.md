@@ -8,7 +8,7 @@ title = "Adicionar formulário dinâmicos com inlineformset_factory em uma aplic
 
 +++
 
-Para complementar o POST anterior, decidi fazer uma explicação rápida de como usar inlineforset_factory com Class-Based View.
+Para complementar o POST anterior, decidi fazer uma explicação rápida de como usar inlineformset_factory com Class-Based View.
 
 ## Models e Forms
 
@@ -30,7 +30,7 @@ class ItemOrder(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=20, decimal_places=2)
 ```
-Diferente do exemplo anterior, o inlineforset_factory deve ser declarado dentro do formulário.
+Diferente do exemplo anterior, o inlineformset_factory deve ser declarado dentro do formulário.
 
 ### forms.py
 ```python

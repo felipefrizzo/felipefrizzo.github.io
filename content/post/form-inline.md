@@ -9,7 +9,7 @@ title = "Adicionar formulário dinâmicos com inlineformset_factory em uma aplic
 
 +++
 
-Esta é apenas uma explicação rápida de como usar inlineforset_factory no Django.
+Esta é apenas uma explicação rápida de como usar inlineformset_factory no Django.
 
 ## Models e Forms
 
