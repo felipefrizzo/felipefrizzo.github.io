@@ -4,7 +4,7 @@ Tags = ["django", "python", "inline", "forms", 'dynamic', 'cbv']
 image = "/img/home-bg.jpg"
 author = "Felipe Frizzo"
 date = "2016-06-11T23:43:54-03:00"
-title = "Adicionar formulário dinâmicos com inlineforset_factory em uma aplicação Django usando Class-Based View"
+title = "Adicionar formulário dinâmicos com inlineformset_factory em uma aplicação Django usando Class-Based View"
 
 +++
 

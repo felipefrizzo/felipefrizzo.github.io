@@ -5,7 +5,7 @@ Tags = ["django", "python", "inline", "forms", 'dynamic']
 image = "/img/home-bg.jpg"
 author = "Felipe Frizzo"
 date = "2016-02-14T15:44:18-02:00"
-title = "Adicionar formulário dinâmicos com inlineforset_factory em uma aplicação Django"
+title = "Adicionar formulário dinâmicos com inlineformset_factory em uma aplicação Django"
 
 +++
 
