@@ -4,11 +4,10 @@ build:
     - script:
         name: setup hugo
         code: go get github.com/spf13/hugo
-    - script:
-        name: build app
-        code: |
-              cd /pipeline/source
-              hugo
+    - arjen/hugo-build:
+        version: "0.15"
+        theme: startbootstrap-clean-blog
+        flags: --buildDrafts=true
 deploy:
   steps:
     - install-packages:
