@@ -4,10 +4,11 @@ build:
     - script:
         name: setup hugo
         code: go get github.com/spf13/hugo
-    - arjen/hugo-build:
-        version: "0.14"
-        theme: herring-cove
-        flags: --buildDrafts=true
+    - script:
+        name: build app
+        code: |
+              cd /pipeline/source
+              hugo
 deploy:
   steps:
     - install-packages:
@@ -16,7 +17,6 @@ deploy:
         token: $GIT_TOKEN
         basedir: ./public
         branch: master
-        domain: felipefrizzo.github.io
         repo: felipefrizzo/felipefrizzo.github.io
 dev:
   steps:
