@@ -64,8 +64,7 @@ from cadastro.models import Order, ItemOrder
 
 def order(request):
     order_forms = Order()
-    item_order_formset = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms, extra=1, can_delete=False,
-                                               min_num=1, validate_min=True)
+    item_order_formset = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms, extra=1, can_delete=False, min_num=1, validate_min=True)
 
     if request.method == 'POST':
         forms = OrderForms(request.POST, request.FILES, instance=order_forms, prefix='main')
