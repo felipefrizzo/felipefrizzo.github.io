@@ -6,7 +6,7 @@ build:
         code: go get github.com/spf13/hugo
     - arjen/hugo-build:
         version: "0.15"
-        theme: startbootstrap-clean-blog
+        theme: hugo-minimalist-theme
         flags: --buildDrafts=true
 deploy:
   steps:
