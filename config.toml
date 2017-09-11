@@ -2,43 +2,62 @@ baseurl = "http://felipefrizzo.github.io"
 title = "Felipe Frizzo"
 canonifyurls = true
 paginate = 10
-theme = "startbootstrap-clean-blog"
+theme = "hugo-minimalist-theme"
 languageCode = "en-us"
-copyright = "Copyright 2016, Felipe Frizzo; all rights reserved."
 
 [author]
     name = "Felipe Frizzo"
 
 [params]
-    DateForm = "January 2, 2006"
-    Author = "Felipe Frizzo"
-    email = "felipefrizzo@gmail.com"
-    Ganalytics = "XX-00000000-0"
+    site_author = "Felipe Frizzo"
+    site_description = "The awesome blog of Felipe Frizzo."
+    location = "Cascavel, Paraná"
 
-[[menu.main]]
-    name = "home"
-    url = "/"
+    avatar = "img/profile-image.png"
+    header_background = "img/desk.jpg"
+    header_title = "Felipe Frizzo"
+    copyright = "Copyright 2016, Felipe Frizzo; all rights reserved."
 
-[[menu.main]]
-    name = "post"
-    url = "/post/"
+    google_analytics = "UA-73771834-1"
 
-[[params.social]]
-    url = "http://github.com/felipefrizzo"
-    title = "github"
+[social]
+    twitter   = "felipefrizzo"
+    facebook  = "felipefrizzo"
+    linkedin  = "felipefrizzo"
+    instagram = "felipefrizzo"
+    github    = "felipefrizzo"
+    gplus     = "felipefrizzo"
 
-[[params.social]]
-    url = "http://linkedin.com/in/felipefrizzo"
-    title = "linkedin"
-
-[[params.social]]
-    url = "https://plus.google.com/u/0/+felipefrizzo/"
-    title = "google-plus"
-
-[[params.social]]
-    url = "http://www.twitter.com/felipefrizzo"
-    title = "twitter"
-
-[[params.social]]
-    url = "http://facebook.com/felipefrizzo"
-    title = "facebook"
+# [params]
+#     DateForm = "January 2, 2006"
+#     Author = "Felipe Frizzo"
+#     email = "felipefrizzo@gmail.com"
+#     Ganalytics = "XX-00000000-0"
+#
+# [[menu.main]]
+#     name = "home"
+#     url = "/"
+#
+# [[menu.main]]
+#     name = "post"
+#     url = "/post/"
+#
+# [[params.social]]
+#     url = "http://github.com/felipefrizzo"
+#     title = "github"
+#
+# [[params.social]]
+#     url = "http://linkedin.com/in/felipefrizzo"
+#     title = "linkedin"
+#
+# [[params.social]]
+#     url = "https://plus.google.com/u/0/+felipefrizzo/"
+#     title = "google-plus"
+#
+# [[params.social]]
+#     url = "http://www.twitter.com/felipefrizzo"
+#     title = "twitter"
+#
+# [[params.social]]
+#     url = "http://facebook.com/felipefrizzo"
+#     title = "facebook"

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Felipe Frizzo</title>
+    <link>http://felipefrizzo.github.io/categories/</link>
+    <description>Recent content in Categories on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright 2016, Felipe Frizzo; all rights reserved.</copyright>
+    
+	<atom:link href="http://felipefrizzo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cbv</title>
+      <link>http://felipefrizzo.github.io/categories/cbv/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/cbv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deploy</title>
+      <link>http://felipefrizzo.github.io/categories/deploy/</link>
+      <pubDate>Wed, 03 Feb 2016 21:37:12 -0200</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/deploy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Devops</title>
+      <link>http://felipefrizzo.github.io/categories/devops/</link>
+      <pubDate>Wed, 03 Feb 2016 21:37:12 -0200</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django</title>
+      <link>http://felipefrizzo.github.io/categories/django/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Forms</title>
+      <link>http://felipefrizzo.github.io/categories/forms/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/forms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Heroku</title>
+      <link>http://felipefrizzo.github.io/categories/heroku/</link>
+      <pubDate>Wed, 03 Feb 2016 21:37:12 -0200</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/heroku/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Inline</title>
+      <link>http://felipefrizzo.github.io/categories/inline/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/inline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://felipefrizzo.github.io/categories/python/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

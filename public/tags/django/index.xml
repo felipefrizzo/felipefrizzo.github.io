@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Django on Felipe Frizzo</title>
+    <link>http://felipefrizzo.github.io/tags/django/</link>
+    <description>Recent content in Django on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright 2016, Felipe Frizzo; all rights reserved.</copyright>
+    <lastBuildDate>Sat, 11 Jun 2016 23:43:54 -0300</lastBuildDate>
+    
+	<atom:link href="http://felipefrizzo.github.io/tags/django/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Adicionar formulário dinâmicos com inlineformset_factory em uma aplicação Django usando Class-Based View</title>
+      <link>http://felipefrizzo.github.io/post/form-inline-cbv/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/post/form-inline-cbv/</guid>
+      <description>Para complementar o POST anterior, decidi fazer uma explicação rápida de como usar inlineformset_factory com Class-Based View.
+Models e Forms Digamos que nosso site tem umas lista pedidos, onde temos que adicionar vários produtos em um pedido. Assim, no mais básico nosso modelo e formulário podemos ter algo como isto.
+models.py from django.db import models class Order(models.Model): client = models.CharField(max_length=255) date = models.DateField(auto_now_add=True) class ItemOrder(models.Model): order = models.ForeignKey(&#39;Order&#39;) product = models.</description>
+    </item>
+    
+    <item>
+      <title>Adicionar formulário dinâmicos com inlineformset_factory em uma aplicação Django</title>
+      <link>http://felipefrizzo.github.io/post/form-inline/</link>
+      <pubDate>Sun, 14 Feb 2016 15:44:18 -0200</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/post/form-inline/</guid>
+      <description>Esta é apenas uma explicação rápida de como usar inlineformset_factory no Django.
+Models e Forms Digamos que nosso site tem umas lista pedidos, onde temos que adicionar vários produtos em um pedido. Assim, no mais básico nosso modelo e formulário podemos ter algo como isto.
+models.py from django.db import models class Order(models.Model): client = models.CharField() date = models.DateField(auto_now_add=True) class ItemOrder(models.Model): order = models.ForeignKey(&#39;Order&#39;) product = models.CharField() quantity = models.PositiveIntegerField() price = models.</description>
+    </item>
+    
+    <item>
+      <title>Wercker - Build e Deploy de maneira facil no Heroku de uma aplicação Python</title>
+      <link>http://felipefrizzo.github.io/post/wercker/</link>
+      <pubDate>Wed, 03 Feb 2016 21:37:12 -0200</pubDate>
+      
+      <guid>http://felipefrizzo.github.io/post/wercker/</guid>
+      <description>O que é o Wercker?
+Wercker é uma plataforma para facilitar as tarefas de build e deployment. A versão atual utiliza Docker para executar seus builds, assim você pode usar o Wercker para fazer o build e deployment de qualquer linguagem basta utilizar uma imagem Docker e configurar os passos a serem executados pelo. Você pode customizar scripts para executar os passos tanto no build quanto no deployment assim evitando retrabalho quando precisar fazer o processo para outra aplicação que tenha a mesma estrutura.</description>
+    </item>
+    
+  </channel>
+</rss>
