@@ -3,7 +3,7 @@ build:
   steps:
     - script:
         name: setup hugo
-        code: go get github.com/spf13/hugo
+        code: go get github.com/gohugoio/hugo
     - arjen/hugo-build:
         version: "0.15"
         theme: hugo-minimalist-theme
@@ -21,7 +21,7 @@ dev:
   steps:
     - script:
         name: setup hugo
-        code: go get github.com/spf13/hugo
+        code: go get github.com/gohugoio/hugo
     - script:
         name: build app
         code: |
