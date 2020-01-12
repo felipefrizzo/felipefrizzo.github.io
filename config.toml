@@ -1,8 +1,8 @@
-baseurl = "http://felipefrizzo.github.io"
+baseurl = "https://felipefrizzo.github.io"
 title = "Felipe Frizzo"
 canonifyurls = true
 paginate = 10
-theme = "hugo-minimalist-theme"
+theme = "hugo-theme-minos"
 languageCode = "en-us"
 disqusShortname = "felipefrizzogithubio"
 
@@ -20,7 +20,7 @@ disqusShortname = "felipefrizzogithubio"
     header_title = "Felipe Frizzo"
     copyright = "Copyright 2016, Felipe Frizzo; all rights reserved."
 
-    google_analytics = "UA-73771834-1"
+    googleAnalytics = "UA-73771834-1"
 
 [social]
     twitter   = "felipefrizzo"
