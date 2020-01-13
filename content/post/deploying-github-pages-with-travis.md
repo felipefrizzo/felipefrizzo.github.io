@@ -9,13 +9,13 @@ Description = ""
 
 Travis CI é uma serviço de integração contínua usada para build, testes e deploy de software que estão no GitHub, para projetos open sources pode ser utilizado sem quaisquer cobranças.
 
-Ao acessar a plataforma do Travis você terá a opção de ativar determinado repositório e quando o travis estiver ativado o GitHub passará a notificar quando houver novos commits.
+Ao acessar o Travis você terá a opção de ativar determinado repositório e quando o travis estiver ativado o GitHub passará a notificar quando houver novos commits.
 
 ![alt text](/img/post/deploying-github-pages-with-travis/enable-travis.png)
 
 Quando você tiver ativado o repositório no travis, você precisará ter um arquivo chamado `.travis.yml`, esse arquivo contém instruções que informam ao travis o que fazer, como fazer e quando fazer. Nesse passo é onde entra a mágica para realizar o deploy para o GitHub Pages.
 
-### Adicionando o `.travic.yml` ao seu projeto
+### Adicionando o `.travis.yml` ao seu projeto
 
 Como exemplo utilizaremos um blog feito com [Hugo]('https://gohugo.io')
 
@@ -64,6 +64,13 @@ deploy:
 * `local_dir`: Diretório a ser enviado para o GitHub pages, por padrão é o diretório atual. Pode ser especificado path absoluto ou relativo.
 * `target_branch`: Branch onde será enviado o conteudo do local_dir, por padrão é gh-pages
 * `on/branch`: Branch que será a trigger para realizar o deploy.
+
+### Tudo pronto
+
+Agora que está tudo em seu lugar, a cada novo commit o github passará a notificar o Travis para que começe o build mas somente na branch master ele irá realizar o deploy, e no Travis estará semelhante às capturas de tela abaixo. Você também pode acionar o build manualmente pelo dashboard do Travis.
+
+![alt text](/img/post/deploying-github-pages-with-travis/build-commit-travis.png)
+![alt text](/img/post/deploying-github-pages-with-travis/build-finish-travis.png)
 
 Documentação:  
 [https://docs.travis-ci.com/user/deployment/pages/]('https://docs.travis-ci.com/user/deployment/pages/')
