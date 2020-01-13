@@ -1,49 +1,47 @@
 +++
 Categories = ["Django", "Python", "Forms", "Inline", "CBV"]
 Tags = ["django", "python", "inline", "forms", 'dynamic', 'cbv']
-image = "/img/home-bg.jpg"
 author = "Felipe Frizzo"
 date = "2016-06-11T23:43:54-03:00"
-title = "Adicionar formulário dinâmicos com inlineformset_factory em uma aplicação Django usando Class-Based View"
+title = "Formulários dinâmicos com inlineformset_factory em uma aplicação Django utilizando Class-Based View"
 
 +++
 
-Para complementar o POST anterior, decidi fazer uma explicação rápida de como usar inlineformset_factory com Class-Based View.
+Neste post iremos abordar de forma simples como utilizar o `inlineformset_factory` no Django, utilizando Class-Based View.
 
-## Models e Forms
+## Modelo e Formulário
 
-Digamos que nosso site tem umas lista pedidos, onde temos que adicionar vários produtos em um pedido. Assim, no mais básico nosso *modelo* e *formulário* podemos ter algo como isto.
+De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um `modelo` e um `formulário` como o exemplo abaixo.
 
-### models.py
 ```python
+# models.py
 from django.db import models
 
 
 class Order(models.Model):
-    client = models.CharField(max_length=255)
+    client = models.CharField()
     date = models.DateField(auto_now_add=True)
 
 
 class ItemOrder(models.Model):
     order = models.ForeignKey('Order')
-    product = models.CharField(max_length=255)
+    product = models.CharField()
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=20, decimal_places=2)
 ```
+
 Diferente do exemplo anterior, o inlineformset_factory deve ser declarado dentro do formulário.
 
-### forms.py
 ```python
+# forms.py
 from django import forms
-from django.forms.models import inlineformset_factory
-
 from cadastro.models import Order, ItemOrder
 
 
 class OrderForms(forms.ModelForm):
     class Meta:
         model = Order
-        exclude = ['data']
+        exclude = ['date']
 
 
 class ItemOrderForms(forms.ModelForm):
@@ -54,9 +52,10 @@ class ItemOrderForms(forms.ModelForm):
 ItemOrderFormSet = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms)
 ```
 
-Agora vamos usar Class-Based View para mostrar o formulário e adicionar um Pedido com varios Itens.
+Agora iremos criar a nossa `view` para podermos exibir e renderizar o formulário para que conseguimos criar um pedido com um ou vário items, mas dessa vez utilizaremos Class-Based View.
 
 ```python
+# views.py
 from django.views.generic import CreateView
 from django.shortcuts import redirect
 
@@ -160,7 +159,7 @@ O template continua o mesmo do exemplo anterior.
 {% endblock %}
 ```
 
-No nosso template precisamos de uma função em **JavaScript** para adicionar novos *forms* de produtos a cada vez que for clicado no botão **Add Item**. Essa função irá primeiro descobrir quantos *forms* foram renderizados. Em seguida, vai pegar um novo modelo, processar ele com os dados de contexto e depois acrescentar no **HTML**. E a próxima parte é umas das mais importantes por que está atualizando os detalhes do **management_form** para aumentar o numero de *forms* incluídos a mais.
+No nosso template precisamos de uma função em `JavaScript` para adicionar novos formulários de items a cada vez que for clicado no botão `Add Item`. Essa função irá primeiro descobrir quantos formulários foram renderizados e em seguida vai adicionar um novo item ao formulário do `Pedido`. E por ultimo irá atualizar o total de formulários de items que foram incluídos.
 
 Documentação
-https://docs.djangoproject.com/en/1.9/ref/forms/models/#inlineformset-factory
+<https://docs.djangoproject.com/en/1.9/ref/forms/models/#inlineformset-factory>

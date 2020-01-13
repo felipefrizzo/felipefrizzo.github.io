@@ -1,22 +1,20 @@
 +++
 Categories = ["Django", "Python", "Inline", "Forms"]
-Description = ""
 Tags = ["django", "python", "inline", "forms", 'dynamic']
-image = "/img/home-bg.jpg"
 author = "Felipe Frizzo"
 date = "2016-02-14T15:44:18-02:00"
-title = "Adicionar formulário dinâmicos com inlineformset_factory em uma aplicação Django"
+title = "Formulários dinâmicos com inlineformset_factory em uma aplicação Django"
 
 +++
 
-Esta é apenas uma explicação rápida de como usar inlineformset_factory no Django.
+Neste post iremos abordar de forma simples como utilizar o `inlineformset_factory` no Django.
 
-## Models e Forms
+## Modelo e Formulário
 
-Digamos que nosso site tem umas lista pedidos, onde temos que adicionar vários produtos em um pedido. Assim, no mais básico nosso *modelo* e *formulário* podemos ter algo como isto.
+De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um `modelo` e um `formulário` como o exemplo abaixo.
 
-### models.py
 ```python
+# models.py
 from django.db import models
 
 
@@ -32,8 +30,8 @@ class ItemOrder(models.Model):
     price = models.DecimalField(max_digits=20, decimal_places=2)
 ```
 
-### forms.py
 ```python
+# forms.py
 from django import forms
 from cadastro.models import Order, ItemOrder
 
@@ -41,7 +39,7 @@ from cadastro.models import Order, ItemOrder
 class OrderForms(forms.ModelForm):
     class Meta:
         model = Order
-        exclude = ['data']
+        exclude = ['date']
 
 
 class ItemOrderForms(forms.ModelForm):
@@ -50,10 +48,10 @@ class ItemOrderForms(forms.ModelForm):
         exclude = ['order']
 ```
 
-Agora vamos criar a **views.py**, para exibir e renderizar o formulário para adicionar um Pedido com um ou vários Produtos.
+Agora iremos criar a nossa `view` para podermos exibir e renderizar o formulário para que conseguimos criar um pedido com um ou vários items.
 
-### Views
 ```python
+# views.py
 from django.forms.models import inlineformset_factory
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
@@ -88,14 +86,15 @@ def order(request):
     return render(request, 'order.html', context)
 ```
 
-* Instanciamos a classe Order
-* Instanciamos o inlineformset_factory
-    * *Order*: classe **PAI**.
-    * *ItemOrder*: class **FILHA**.
-    * *form=ItemOrderForm*: indica qual formulário a ser usado.
-    * *extra=1*: quantidade de *forms* a ser apresentado no *html* inicialmente.
-    * *can_delete=False*: ignora a opção de deletar o *form*.
-    * *min_num=1* e *validate_min=True*: o primeiro parametro seta uma quantidade mínima de *formlário*, o segundo habilita a validação do *formulário*.
+* Instanciamos a classe `Order`.
+* Instanciamos o `inlineformset_factory`.
+  * `Order`: Indicamos qual é a classe **PAI**.
+  * `ItemOrder`: Indicamos qual é a classe **FILHA**.
+  * `form=ItemOrderForm`: Indicamos o formulário a ser usado.
+  * `extra=1`: Indicamos quantos items teremos inicialmente quando for renderizado o `HTML`.
+  * `can_delete=False`: Ignoramos a opção de deletar o formulário.
+  * `min_num=1`: Indicamos a quantidade mínima de items.
+  * `validate_min=True`: Habilitamos a validação do formulário
 
 ## Template
 
@@ -164,7 +163,7 @@ def order(request):
 {% endblock %}
 ```
 
-No nosso template precisamos de uma função em **JavaScript** para adicionar novos *forms* de produtos a cada vez que for clicado no botão **Add Item**. Essa função irá primeiro descobrir quantos *forms* foram renderizados. Em seguida, vai pegar um novo modelo, processar ele com os dados de contexto e depois acrescentar no **HTML**. E a próxima parte é umas das mais importantes por que está atualizando os detalhes do **management_form** para aumentar o numero de *forms* incluídos a mais.
+No nosso template precisamos de uma função em `JavaScript` para adicionar novos formulários de items a cada vez que for clicado no botão `Add Item`. Essa função irá primeiro descobrir quantos formulários foram renderizados e em seguida vai adicionar um novo item ao formulário do `Pedido`. E por ultimo irá atualizar o total de formulários de items que foram incluídos.
 
-Documentação
-https://docs.djangoproject.com/en/1.9/ref/forms/models/#inlineformset-factory
+Documentação:  
+<https://docs.djangoproject.com/en/1.9/ref/forms/models/#inlineformset-factory>
