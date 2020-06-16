@@ -5,6 +5,7 @@ paginate = 10
 theme = "hugo-theme-minos"
 languageCode = "en-us"
 disqusShortname = "felipefrizzogithubio"
+googleAnalytics = "UA-73771834-1"
 
 [author]
     name = "Felipe Frizzo"
@@ -19,8 +20,6 @@ disqusShortname = "felipefrizzogithubio"
     header_background = "img/desk.jpg"
     header_title = "Felipe Frizzo"
     copyright = "Copyright 2016, Felipe Frizzo; all rights reserved."
-
-    googleAnalytics = "UA-73771834-1"
 
 [social]
     twitter   = "felipefrizzo"
