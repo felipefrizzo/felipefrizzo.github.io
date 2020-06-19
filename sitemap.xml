@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/ansible/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/ansible/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/ci/cd/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/ci/cd/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/iac/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/packer/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/packer/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/self-hosted/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/terraform/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/terraform/</loc>
+    <lastmod>2020-06-18T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/</loc>
+    <lastmod>2020-06-15T15:15:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/aws/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/aws/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/devops/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/devops/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/ebs/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/ebs/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/resize/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/storage/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/storage/</loc>
+    <lastmod>2020-01-29T11:02:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/cd/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/ci/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/delivery/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/deploy/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/deploy/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/travis/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/travis/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/</loc>
+    <lastmod>2020-01-12T20:20:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/cbv/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/cbv/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/django/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/django/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/dynamic/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/forms/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/forms/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/form-inline-cbv/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/inline/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/inline/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/categories/python/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/tags/python/</loc>
+    <lastmod>2016-06-11T23:43:54-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felipefrizzo.github.io/post/form-inline/</loc>
+    <lastmod>2016-02-14T15:44:18-02:00</lastmod>
+  </url>
+  
+</urlset>

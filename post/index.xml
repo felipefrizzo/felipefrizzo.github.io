@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Felipe Frizzo</title>
+    <link>https://felipefrizzo.github.io/post/</link>
+    <description>Recent content in Posts on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2020 15:15:32 -0300</lastBuildDate>
+    
+	<atom:link href="https://felipefrizzo.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 2</title>
+      <link>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/</guid>
+      <description>Na primeira parte desta série sobre como rodar o gitlab runner e ter alta disponibilidade, falamos sobre as tecnologia empregadas no projeto e também abordamos como utilizar o ansible para fazer a configuração e a instalação do runner e suas dependencias. Agora iremos falar sobre packer e terraform, lembrando você pode acompanhar o código pelo repositório.
+Packer Como já falamos na primeira parte o packer é uma ferramenta para automação da criação de imagens, como por exemplo AMI (Amazon machine images).</description>
+    </item>
+    
+    <item>
+      <title>Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 1</title>
+      <link>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/</link>
+      <pubDate>Mon, 15 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/</guid>
+      <description>Neste artigo irei abordar como rodar os runners do gitlab na sua infraestrutura tendo alta disponibilidade e tudo isso com código usando ansible, packer e terraform. Este artigo será dividido em duas partes onde nessa primeira parte irei contextualizar as ferramentas citadas acima e num próximo post onde iremos colocar a mão na massa.
+Gitlab Runner O gitlab-runner é um projeto open-source escrito em golang que é usado para rodar os jobs (pipelines) e enviar o resultado para o gitlab.</description>
+    </item>
+    
+    <item>
+      <title>Como diminuir o tamanho do volume raiz do EC2</title>
+      <link>https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/</guid>
+      <description>Os volumes EBS (Elastic Block Store) da Amazon são fáceis de usar e expandir, mas são difíceis de diminuir quando o tamanho aumenta. Aqui vou deixar um dica de como diminuir o tamanho do EBS. Eu vou assumir que você queira diminuir o volume raiz da sua EC2.
+Primeiramente você vai precisar parar a instância que deseja fazer a alteração no tamanho do disco. Após essa etapa crie um snapshot do atual volume e crie um volume do tipo General Purpose SSD a partir deste snapshot.</description>
+    </item>
+    
+    <item>
+      <title>TravisCI para fazer o deploy do seu blog ao GitHub Pages</title>
+      <link>https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/</guid>
+      <description>Travis CI é uma serviço de integração contínua usada para build, testes e deploy de software que estão no GitHub, para projetos open sources pode ser utilizado sem quaisquer cobranças.
+Ao acessar o Travis você terá a opção de ativar determinado repositório e quando o travis estiver ativado o GitHub passará a notificar quando houver novos commits.
+Quando você tiver ativado o repositório no travis, você precisará ter um arquivo chamado .</description>
+    </item>
+    
+    <item>
+      <title>Formulários dinâmicos com inlineformset_factory em uma aplicação Django utilizando Class-Based View</title>
+      <link>https://felipefrizzo.github.io/post/form-inline-cbv/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/form-inline-cbv/</guid>
+      <description>Neste post iremos abordar de forma simples como utilizar o inlineformset_factory no Django, utilizando Class-Based View.
+Modelo e Formulário De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um modelo e um formulário como o exemplo abaixo.
+# models.py from django.db import models class Order(models.Model): client = models.CharField() date = models.DateField(auto_now_add=True) class ItemOrder(models.Model): order = models.ForeignKey(&#39;Order&#39;) product = models.CharField() quantity = models.</description>
+    </item>
+    
+    <item>
+      <title>Formulários dinâmicos com inlineformset_factory em uma aplicação Django</title>
+      <link>https://felipefrizzo.github.io/post/form-inline/</link>
+      <pubDate>Sun, 14 Feb 2016 15:44:18 -0200</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/form-inline/</guid>
+      <description>Neste post iremos abordar de forma simples como utilizar o inlineformset_factory no Django.
+Modelo e Formulário De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um modelo e um formulário como o exemplo abaixo.
+# models.py from django.db import models class Order(models.Model): client = models.CharField() date = models.DateField(auto_now_add=True) class ItemOrder(models.Model): order = models.ForeignKey(&#39;Order&#39;) product = models.CharField() quantity = models.PositiveIntegerField() price = models.</description>
+    </item>
+    
+  </channel>
+</rss>

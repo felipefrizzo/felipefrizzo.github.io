@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Felipe Frizzo</title>
+    <link>https://felipefrizzo.github.io/categories/</link>
+    <description>Recent content in Categories on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2020 15:15:32 -0300</lastBuildDate>
+    
+	<atom:link href="https://felipefrizzo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ansible</title>
+      <link>https://felipefrizzo.github.io/categories/ansible/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CI/CD</title>
+      <link>https://felipefrizzo.github.io/categories/ci/cd/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/ci/cd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Iac</title>
+      <link>https://felipefrizzo.github.io/categories/iac/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/iac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Packer</title>
+      <link>https://felipefrizzo.github.io/categories/packer/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/packer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terraform</title>
+      <link>https://felipefrizzo.github.io/categories/terraform/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/terraform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AWS</title>
+      <link>https://felipefrizzo.github.io/categories/aws/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>https://felipefrizzo.github.io/categories/devops/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EBS</title>
+      <link>https://felipefrizzo.github.io/categories/ebs/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/ebs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Resize</title>
+      <link>https://felipefrizzo.github.io/categories/resize/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/resize/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Storage</title>
+      <link>https://felipefrizzo.github.io/categories/storage/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/storage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deploy</title>
+      <link>https://felipefrizzo.github.io/categories/deploy/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/deploy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Travis</title>
+      <link>https://felipefrizzo.github.io/categories/travis/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/travis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CBV</title>
+      <link>https://felipefrizzo.github.io/categories/cbv/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/cbv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django</title>
+      <link>https://felipefrizzo.github.io/categories/django/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Forms</title>
+      <link>https://felipefrizzo.github.io/categories/forms/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/forms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Inline</title>
+      <link>https://felipefrizzo.github.io/categories/inline/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/inline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://felipefrizzo.github.io/categories/python/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

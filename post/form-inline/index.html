@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulários dinâmicos com inlineformset_factory em uma aplicação Django // Felipe Frizzo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Formulários dinâmicos com inlineformset_factory em uma aplicação Django" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://felipefrizzo.github.io/post/form-inline/" />
+    
+
+    <link rel="shortcut icon" href="https://felipefrizzo.github.io/favicon.ico">
+
+    <link href="https://felipefrizzo.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://felipefrizzo.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://felipefrizzo.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.57.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://felipefrizzo.github.io/">Felipe Frizzo</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Formulários dinâmicos com inlineformset_factory em uma aplicação Django</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="https://felipefrizzo.github.io/post/form-inline/" class="article-date">
+                <time datetime='2016-02-14T15:44:18.000-02:00' itemprop="datePublished">2016-02-14</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/django">Django</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/python">Python</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/inline">Inline</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/forms">Forms</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="https://felipefrizzo.github.io/post/form-inline/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<p>Neste post iremos abordar de forma simples como utilizar o <code>inlineformset_factory</code> no Django.</p>
+
+<h2 id="modelo-e-formulário">Modelo e Formulário</h2>
+
+<p>De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um <code>modelo</code> e um <code>formulário</code> como o exemplo abaixo.</p>
+
+<pre><code class="language-python"># models.py
+from django.db import models
+
+
+class Order(models.Model):
+    client = models.CharField()
+    date = models.DateField(auto_now_add=True)
+
+
+class ItemOrder(models.Model):
+    order = models.ForeignKey('Order')
+    product = models.CharField()
+    quantity = models.PositiveIntegerField()
+    price = models.DecimalField(max_digits=20, decimal_places=2)
+</code></pre>
+
+<pre><code class="language-python"># forms.py
+from django import forms
+from cadastro.models import Order, ItemOrder
+
+
+class OrderForms(forms.ModelForm):
+    class Meta:
+        model = Order
+        exclude = ['date']
+
+
+class ItemOrderForms(forms.ModelForm):
+    class Meta:
+        model = ItemOrder
+        exclude = ['order']
+</code></pre>
+
+<p>Agora iremos criar a nossa <code>view</code> para podermos exibir e renderizar o formulário para que conseguimos criar um pedido com um ou vários items.</p>
+
+<pre><code class="language-python"># views.py
+from django.forms.models import inlineformset_factory
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render
+
+from cadastro.forms import OrderForms, ItemOrderForms
+from cadastro.models import Order, ItemOrder
+
+
+def order(request):
+    order_forms = Order()
+    item_order_formset = inlineformset_factory(Order, ItemOrder, form=ItemOrderForms, extra=1, can_delete=False, min_num=1, validate_min=True)
+
+    if request.method == 'POST':
+        forms = OrderForms(request.POST, request.FILES, instance=order_forms, prefix='main')
+        formset = item_order_formset(request.POST, request.FILES, instance=order_forms, prefix='product')
+
+        if forms.is_valid() and formset.is_valid():
+            forms = forms.save(commit=False)
+            forms.save()
+            formset.save()
+            return HttpResponseRedirect('/pedido/')
+
+    else:
+        forms = OrderForms(instance=order_forms, prefix='main')
+        formset = item_order_formset(instance=order_forms, prefix='product')
+
+    context = {
+        'forms': forms,
+        'formset': formset,
+    }
+
+    return render(request, 'order.html', context)
+</code></pre>
+
+<ul>
+<li>Instanciamos a classe <code>Order</code>.</li>
+<li>Instanciamos o <code>inlineformset_factory</code>.
+
+<ul>
+<li><code>Order</code>: Indicamos qual é a classe <strong>PAI</strong>.</li>
+<li><code>ItemOrder</code>: Indicamos qual é a classe <strong>FILHA</strong>.</li>
+<li><code>form=ItemOrderForm</code>: Indicamos o formulário a ser usado.</li>
+<li><code>extra=1</code>: Indicamos quantos items teremos inicialmente quando for renderizado o <code>HTML</code>.</li>
+<li><code>can_delete=False</code>: Ignoramos a opção de deletar o formulário.</li>
+<li><code>min_num=1</code>: Indicamos a quantidade mínima de items.</li>
+<li><code>validate_min=True</code>: Habilitamos a validação do formulário</li>
+</ul></li>
+</ul>
+
+<h2 id="template">Template</h2>
+
+<pre><code class="language-html">{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}{{ template_title }}{% endblock %}
+
+{% block content %}
+    &lt;script&gt;
+        $(document).ready(function(){
+            $(&quot;#add-item&quot;).click(function(ev) {
+                ev.preventDefault();
+                var count = $('#order').children().length;
+                var tmplMarkup = $(&quot;#item-order&quot;).html();
+                var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+                $(&quot;div#order&quot;).append(compiledTmpl);
+
+                // update form count
+                $('#id_product-TOTAL_FORMS').attr('value', count + 1);
+
+                // some animate to scroll to view our new form
+                $('html, body').animate({
+                    scrollTop: $(&quot;#add-item&quot;).position().top-200
+                }, 800);
+            });
+        });
+    &lt;/script&gt;
+
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-6 col-md-offset-3&quot;&gt;
+            &lt;h1 class=&quot;page-header text-center lead&quot;&gt;Cadastro Pedido&lt;/h1&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-8 col-md-offset-2&quot;&gt;
+            &lt;form action=&quot;&quot; method=&quot;POST&quot;&gt;
+                {% csrf_token %}
+                {{ forms|crispy }}
+                {{ formset.management_form }}
+
+                &lt;legend class=&quot;lead&quot;&gt;PRODUTOS&lt;/legend&gt;
+
+                &lt;div id=&quot;order&quot; class=&quot;form-inline form-group&quot;&gt;
+                    {% for item_order_form in formset %}
+                        &lt;div id=&quot;item-{{ forloop.counter0 }}&quot;&gt;
+                            {{ item_order_form|crispy }}
+                        &lt;/div&gt;
+                    {% endfor %}
+                &lt;/div&gt;
+
+                &lt;a class=&quot;btn btn-info&quot; id=&quot;add-item&quot;&gt;&lt;i class=&quot;fa fa-plus&quot;&gt;&lt;/i&gt; Add Item&lt;/a&gt;
+
+                &lt;div class=&quot;form-inline buttons&quot;&gt;
+                    &lt;a href=&quot;{% url 'order' %}&quot; class=&quot;btn btn-warning pull-right&quot;&gt;&lt;i class=&quot;fa fa-times&quot;&gt;&lt;/i&gt; Cancelar&lt;/a&gt;
+                    &lt;button class=&quot;btn btn-primary pull-right&quot; value=&quot;Save&quot;&gt;&lt;i class=&quot;fa fa-floppy-o&quot;&gt;&lt;/i&gt; Salvar&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+    &lt;/div&gt;    
+
+    &lt;script type=&quot;text/html&quot; id=&quot;item-order&quot;&gt;
+        &lt;div id=&quot;item-__prefix__&quot; style=&quot;margin-top: 10px&quot;&gt;
+                {{ formset.empty_form|crispy }}
+        &lt;/div&gt;
+    &lt;/script&gt;
+{% endblock %}
+</code></pre>
+
+<p>No nosso template precisamos de uma função em <code>JavaScript</code> para adicionar novos formulários de items a cada vez que for clicado no botão <code>Add Item</code>. Essa função irá primeiro descobrir quantos formulários foram renderizados e em seguida vai adicionar um novo item ao formulário do <code>Pedido</code>. E por ultimo irá atualizar o total de formulários de items que foram incluídos.</p>
+
+<p>Documentação:<br />
+<a href="https://docs.djangoproject.com/en/1.9/ref/forms/models/#inlineformset-factory">https://docs.djangoproject.com/en/1.9/ref/forms/models/#inlineformset-factory</a></p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#modelo-e-formulário">Modelo e Formulário</a></li>
+<li><a href="#template">Template</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/django">django
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/python">python
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/inline">inline
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/forms">forms
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/dynamic">dynamic
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    <a href="https://felipefrizzo.github.io/post/form-inline-cbv/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Formulários dinâmicos com inlineformset_factory em uma aplicação Django utilizando Class-Based View
+        </div>
+    </a>
+    
+    
+</nav>
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "felipefrizzogithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Felipe Frizzo
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+            <br />
+            <br />
+            <ul class="social">
+                
+<li><a href="//twitter.com/felipefrizzo" class="icon-twitter" target="_blank" title="Twitter"></a></li>
+
+
+
+<li><a href="//facebook.com/felipefrizzo" class="icon-facebook-squared" target="_blank" title="Facebook"></a></li>
+
+
+
+<li><a href="//linkedin.com/in/felipefrizzo" class="icon-linkedin" target="_blank" title="Linkedin"></a></li>
+
+
+
+
+
+
+
+<li><a href="//instagram.com/felipefrizzo" class="icon-instagram" target="_blank" title="Instagram"></a></li>
+
+
+
+<li><a href="//github.com/felipefrizzo" class="icon-github" target="_blank" title="Github"></a></li>
+
+
+
+<li><a href="//plus.google.com/+felipefrizzo" class="icon-gplus" target="_blank" title="Google+"></a></li>
+
+
+<li><a href="https://felipefrizzo.github.iopost/index.xml" class="icon-rss" target="_blank" title="RSS"></a></li>
+            </ul>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-73771834-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

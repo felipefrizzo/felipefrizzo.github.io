@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Felipe Frizzo</title>
+    <link>https://felipefrizzo.github.io/tags/</link>
+    <description>Recent content in Tags on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2020 15:15:32 -0300</lastBuildDate>
+    
+	<atom:link href="https://felipefrizzo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ansible</title>
+      <link>https://felipefrizzo.github.io/tags/ansible/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ci/cd</title>
+      <link>https://felipefrizzo.github.io/tags/ci/cd/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/ci/cd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packer</title>
+      <link>https://felipefrizzo.github.io/tags/packer/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/packer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>self-hosted</title>
+      <link>https://felipefrizzo.github.io/tags/self-hosted/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/self-hosted/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terraform</title>
+      <link>https://felipefrizzo.github.io/tags/terraform/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/terraform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>https://felipefrizzo.github.io/tags/aws/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://felipefrizzo.github.io/tags/devops/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ebs</title>
+      <link>https://felipefrizzo.github.io/tags/ebs/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/ebs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>storage</title>
+      <link>https://felipefrizzo.github.io/tags/storage/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/storage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cd</title>
+      <link>https://felipefrizzo.github.io/tags/cd/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/cd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ci</title>
+      <link>https://felipefrizzo.github.io/tags/ci/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>delivery</title>
+      <link>https://felipefrizzo.github.io/tags/delivery/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/delivery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deploy</title>
+      <link>https://felipefrizzo.github.io/tags/deploy/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/deploy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>travis</title>
+      <link>https://felipefrizzo.github.io/tags/travis/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/travis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cbv</title>
+      <link>https://felipefrizzo.github.io/tags/cbv/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/cbv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>django</title>
+      <link>https://felipefrizzo.github.io/tags/django/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dynamic</title>
+      <link>https://felipefrizzo.github.io/tags/dynamic/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/dynamic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>forms</title>
+      <link>https://felipefrizzo.github.io/tags/forms/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/forms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>inline</title>
+      <link>https://felipefrizzo.github.io/tags/inline/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/inline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://felipefrizzo.github.io/tags/python/</link>
+      <pubDate>Sat, 11 Jun 2016 23:43:54 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

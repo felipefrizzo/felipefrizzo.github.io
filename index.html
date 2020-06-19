@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Felipe Frizzo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Felipe Frizzo" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://felipefrizzo.github.io/" />
+    
+<link href="https://felipefrizzo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Felipe Frizzo" />
+    <link rel="shortcut icon" href="https://felipefrizzo.github.io/favicon.ico">
+
+    <link href="https://felipefrizzo.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://felipefrizzo.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://felipefrizzo.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.57.2" />
+</head>
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://felipefrizzo.github.io/">Felipe Frizzo</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/">Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 2</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/" class="article-date">
+                        <time datetime='2020-06-18T15:15:32.000-03:00' itemprop="datePublished">2020-06-18</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/iac">Iac</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/terraform">Terraform</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ansible">Ansible</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/packer">Packer</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ci/cd">CI/CD</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Na primeira parte desta série sobre como rodar o gitlab runner e ter alta disponibilidade, falamos sobre as tecnologia empregadas no projeto e também abordamos como utilizar o ansible para fazer a configuração e a instalação do runner e suas dependencias. Agora iremos falar sobre packer e terraform, lembrando você pode acompanhar o código pelo repositório.
+Packer Como já falamos na primeira parte o packer é uma ferramenta para automação da criação de imagens, como por exemplo AMI (Amazon machine images).
+                    </p>
+                    <p class="article-more-link">
+                        <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/terraform">terraform
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ansible">ansible
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/packer">packer
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ci/cd">ci/cd
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/self-hosted">self-hosted
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/">Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 1</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/" class="article-date">
+                        <time datetime='2020-06-15T15:15:32.000-03:00' itemprop="datePublished">2020-06-15</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/iac">Iac</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/terraform">Terraform</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ansible">Ansible</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/packer">Packer</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ci/cd">CI/CD</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Neste artigo irei abordar como rodar os runners do gitlab na sua infraestrutura tendo alta disponibilidade e tudo isso com código usando ansible, packer e terraform. Este artigo será dividido em duas partes onde nessa primeira parte irei contextualizar as ferramentas citadas acima e num próximo post onde iremos colocar a mão na massa.
+Gitlab Runner O gitlab-runner é um projeto open-source escrito em golang que é usado para rodar os jobs (pipelines) e enviar o resultado para o gitlab.
+                    </p>
+                    <p class="article-more-link">
+                        <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/terraform">terraform
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ansible">ansible
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/packer">packer
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ci/cd">ci/cd
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/self-hosted">self-hosted
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/">Como diminuir o tamanho do volume raiz do EC2</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/" class="article-date">
+                        <time datetime='2020-01-29T11:02:27.000-03:00' itemprop="datePublished">2020-01-29</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/devops">DevOps</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/aws">AWS</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ebs">EBS</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/storage">Storage</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/resize">Resize</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Os volumes EBS (Elastic Block Store) da Amazon são fáceis de usar e expandir, mas são difíceis de diminuir quando o tamanho aumenta. Aqui vou deixar um dica de como diminuir o tamanho do EBS. Eu vou assumir que você queira diminuir o volume raiz da sua EC2.
+Primeiramente você vai precisar parar a instância que deseja fazer a alteração no tamanho do disco. Após essa etapa crie um snapshot do atual volume e crie um volume do tipo General Purpose SSD a partir deste snapshot.
+                    </p>
+                    <p class="article-more-link">
+                        <a href="https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/devops">devops
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/aws">aws
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ebs">ebs
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/storage">storage
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/">TravisCI para fazer o deploy do seu blog ao GitHub Pages</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/" class="article-date">
+                        <time datetime='2020-01-12T20:20:00.000-03:00' itemprop="datePublished">2020-01-12</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/devops">DevOps</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/travis">Travis</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/deploy">Deploy</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Travis CI é uma serviço de integração contínua usada para build, testes e deploy de software que estão no GitHub, para projetos open sources pode ser utilizado sem quaisquer cobranças.
+Ao acessar o Travis você terá a opção de ativar determinado repositório e quando o travis estiver ativado o GitHub passará a notificar quando houver novos commits.
+Quando você tiver ativado o repositório no travis, você precisará ter um arquivo chamado .
+                    </p>
+                    <p class="article-more-link">
+                        <a href="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/devops">devops
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/travis">travis
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ci">ci
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/cd">cd
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/deploy">deploy
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/delivery">delivery
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="https://felipefrizzo.github.io/post/form-inline-cbv/">Formulários dinâmicos com inlineformset_factory em uma aplicação Django utilizando Class-Based View</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="https://felipefrizzo.github.io/post/form-inline-cbv/" class="article-date">
+                        <time datetime='2016-06-11T23:43:54.000-03:00' itemprop="datePublished">2016-06-11</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/django">Django</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/python">Python</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/forms">Forms</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/inline">Inline</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/cbv">CBV</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="https://felipefrizzo.github.io/post/form-inline-cbv/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Neste post iremos abordar de forma simples como utilizar o inlineformset_factory no Django, utilizando Class-Based View.
+Modelo e Formulário De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um modelo e um formulário como o exemplo abaixo.
+# models.py from django.db import models class Order(models.Model): client = models.CharField() date = models.DateField(auto_now_add=True) class ItemOrder(models.Model): order = models.ForeignKey('Order') product = models.CharField() quantity = models.
+                    </p>
+                    <p class="article-more-link">
+                        <a href="https://felipefrizzo.github.io/post/form-inline-cbv/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/django">django
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/python">python
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/inline">inline
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/forms">forms
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/dynamic">dynamic
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/cbv">cbv
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="https://felipefrizzo.github.io/post/form-inline/">Formulários dinâmicos com inlineformset_factory em uma aplicação Django</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="https://felipefrizzo.github.io/post/form-inline/" class="article-date">
+                        <time datetime='2016-02-14T15:44:18.000-02:00' itemprop="datePublished">2016-02-14</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/django">Django</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/python">Python</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/inline">Inline</a>
+                            
+                            
+                            <span>&gt;</span>
+                            
+                            <a class="article-category-link" href="https://felipefrizzo.github.io/categories/forms">Forms</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="https://felipefrizzo.github.io/post/form-inline/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Neste post iremos abordar de forma simples como utilizar o inlineformset_factory no Django.
+Modelo e Formulário De maneira mais basica faremos uma lista de pedidos, onde poderemos adicionar um ou mais produtos por pedido. Teriamos um modelo e um formulário como o exemplo abaixo.
+# models.py from django.db import models class Order(models.Model): client = models.CharField() date = models.DateField(auto_now_add=True) class ItemOrder(models.Model): order = models.ForeignKey('Order') product = models.CharField() quantity = models.PositiveIntegerField() price = models.
+                    </p>
+                    <p class="article-more-link">
+                        <a href="https://felipefrizzo.github.io/post/form-inline/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/django">django
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/python">python
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/inline">inline
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/forms">forms
+                            </a>
+                        </li>
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/dynamic">dynamic
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+
+        
+
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Felipe Frizzo
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+            <br />
+            <br />
+            <ul class="social">
+                
+<li><a href="//twitter.com/felipefrizzo" class="icon-twitter" target="_blank" title="Twitter"></a></li>
+
+
+
+<li><a href="//facebook.com/felipefrizzo" class="icon-facebook-squared" target="_blank" title="Facebook"></a></li>
+
+
+
+<li><a href="//linkedin.com/in/felipefrizzo" class="icon-linkedin" target="_blank" title="Linkedin"></a></li>
+
+
+
+
+
+
+
+<li><a href="//instagram.com/felipefrizzo" class="icon-instagram" target="_blank" title="Instagram"></a></li>
+
+
+
+<li><a href="//github.com/felipefrizzo" class="icon-github" target="_blank" title="Github"></a></li>
+
+
+
+<li><a href="//plus.google.com/+felipefrizzo" class="icon-gplus" target="_blank" title="Google+"></a></li>
+
+
+<li><a href="https://felipefrizzo.github.iopost/index.xml" class="icon-rss" target="_blank" title="RSS"></a></li>
+            </ul>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-73771834-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

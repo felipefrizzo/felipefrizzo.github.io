@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TravisCI para fazer o deploy do seu blog ao GitHub Pages // Felipe Frizzo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="TravisCI para fazer o deploy do seu blog ao GitHub Pages" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/" />
+    
+
+    <link rel="shortcut icon" href="https://felipefrizzo.github.io/favicon.ico">
+
+    <link href="https://felipefrizzo.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://felipefrizzo.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://felipefrizzo.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.57.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://felipefrizzo.github.io/">Felipe Frizzo</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">TravisCI para fazer o deploy do seu blog ao GitHub Pages</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/" class="article-date">
+                <time datetime='2020-01-12T20:20:00.000-03:00' itemprop="datePublished">2020-01-12</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/devops">DevOps</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/travis">Travis</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/deploy">Deploy</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<p>Travis CI é uma serviço de integração contínua usada para build, testes e deploy de software que estão no GitHub, para projetos open sources pode ser utilizado sem quaisquer cobranças.</p>
+
+<p>Ao acessar o Travis você terá a opção de ativar determinado repositório e quando o travis estiver ativado o GitHub passará a notificar quando houver novos commits.</p>
+
+<p><img src="https://felipefrizzo.github.io/img/post/deploying-github-pages-with-travis/enable-travis.png" alt="alt text" /></p>
+
+<p>Quando você tiver ativado o repositório no travis, você precisará ter um arquivo chamado <code>.travis.yml</code>, esse arquivo contém instruções que informam ao travis o que fazer, como fazer e quando fazer. Nesse passo é onde entra a mágica para realizar o deploy para o GitHub Pages.</p>
+
+<h3 id="adicionando-o-travis-yml-ao-seu-projeto">Adicionando o <code>.travis.yml</code> ao seu projeto</h3>
+
+<p>Como exemplo utilizaremos um blog feito com [Hugo](&lsquo;<a href="https://gohugo.io'">https://gohugo.io'</a>)</p>
+
+<h4 id="vamos-detalhar-o-código">Vamos detalhar o código</h4>
+
+<pre><code class="language-yml"># .travis.yml
+language: python
+
+env:
+  global:
+    - PRODUCTION=true
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get -yq install apt-transport-https curl
+
+install:
+  - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.57.2/hugo_0.57.2_Linux-64bit.deb
+  - sudo dpkg -i hugo_0.57.2_Linux-64bit.deb
+  - hugo version
+  - rm -rf public 2&gt; /dev/null
+
+# Build the website
+script:
+  - hugo
+
+deploy:
+  provider: pages
+  github_token: $GITHUB_TOKEN
+  skip_cleanup: true
+  verbose: true
+  keep_history: false
+  local_dir: public
+  target_branch: gh-pages
+  on:
+    branch: master
+</code></pre>
+
+<ul>
+<li><code>deploy</code>: Este campo é onde vamos declarar as instruções de como o travis irá executar o deploy.</li>
+<li><code>provider</code>: Aqui dizemos ao travis para utilizar o provider do github.</li>
+<li><code>github_token</code>: Aqui passamos o token de acesso ao github para que o travis possa realizar o deploy. [Como gerar o Token](&lsquo;<a href="https://help.github.com/pt/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line'">https://help.github.com/pt/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line'</a>).</li>
+<li><code>skip_cleanup</code>: Mantenha esse campo como true para que o travis não delete os arquivos que foi criado durante o build, que provavelmente será os arquivos que você está tentando fazer o upload.</li>
+<li><code>verbose</code>: Opcional, detalhar os passos que está sendo realizado, por padrão é false.</li>
+<li><code>keep_history</code>: Opcional, cria commits incrementais ao invés de fazer um push force, por padrão é false</li>
+<li><code>local_dir</code>: Diretório a ser enviado para o GitHub pages, por padrão é o diretório atual. Pode ser especificado path absoluto ou relativo.</li>
+<li><code>target_branch</code>: Branch onde será enviado o conteudo do local_dir, por padrão é gh-pages</li>
+<li><code>on/branch</code>: Branch que será a trigger para realizar o deploy.</li>
+</ul>
+
+<h3 id="tudo-pronto">Tudo pronto</h3>
+
+<p>Agora que está tudo em seu lugar, a cada novo commit o github passará a notificar o Travis para que começe o build mas somente na branch master ele irá realizar o deploy, e no Travis estará semelhante às capturas de tela abaixo. Você também pode acionar o build manualmente pelo dashboard do Travis.</p>
+
+<p><img src="https://felipefrizzo.github.io/img/post/deploying-github-pages-with-travis/build-commit-travis.png" alt="alt text" />
+<img src="https://felipefrizzo.github.io/img/post/deploying-github-pages-with-travis/build-finish-travis.png" alt="alt text" /></p>
+
+<p>Documentação:<br />
+[<a href="https://docs.travis-ci.com/user/deployment/pages/]('https://docs.travis-ci.com/user/deployment/pages/'">https://docs.travis-ci.com/user/deployment/pages/]('https://docs.travis-ci.com/user/deployment/pages/'</a>)</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#adicionando-o-travis-yml-ao-seu-projeto">Adicionando o <code>.travis.yml</code> ao seu projeto</a>
+<ul>
+<li><a href="#vamos-detalhar-o-código">Vamos detalhar o código</a></li>
+</ul></li>
+<li><a href="#tudo-pronto">Tudo pronto</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/devops">devops
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/travis">travis
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ci">ci
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/cd">cd
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/deploy">deploy
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/delivery">delivery
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    <a href="https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Como diminuir o tamanho do volume raiz do EC2
+        </div>
+    </a>
+    
+    
+    <a href="https://felipefrizzo.github.io/post/form-inline-cbv/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Formulários dinâmicos com inlineformset_factory em uma aplicação Django utilizando Class-Based View&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "felipefrizzogithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Felipe Frizzo
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+            <br />
+            <br />
+            <ul class="social">
+                
+<li><a href="//twitter.com/felipefrizzo" class="icon-twitter" target="_blank" title="Twitter"></a></li>
+
+
+
+<li><a href="//facebook.com/felipefrizzo" class="icon-facebook-squared" target="_blank" title="Facebook"></a></li>
+
+
+
+<li><a href="//linkedin.com/in/felipefrizzo" class="icon-linkedin" target="_blank" title="Linkedin"></a></li>
+
+
+
+
+
+
+
+<li><a href="//instagram.com/felipefrizzo" class="icon-instagram" target="_blank" title="Instagram"></a></li>
+
+
+
+<li><a href="//github.com/felipefrizzo" class="icon-github" target="_blank" title="Github"></a></li>
+
+
+
+<li><a href="//plus.google.com/+felipefrizzo" class="icon-gplus" target="_blank" title="Google+"></a></li>
+
+
+<li><a href="https://felipefrizzo.github.iopost/index.xml" class="icon-rss" target="_blank" title="RSS"></a></li>
+            </ul>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-73771834-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

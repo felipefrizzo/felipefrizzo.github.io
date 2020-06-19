@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 2 // Felipe Frizzo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 2" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/" />
+    
+
+    <link rel="shortcut icon" href="https://felipefrizzo.github.io/favicon.ico">
+
+    <link href="https://felipefrizzo.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://felipefrizzo.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://felipefrizzo.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.57.2" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://felipefrizzo.github.io/">Felipe Frizzo</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 2</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/" class="article-date">
+                <time datetime='2020-06-18T15:15:32.000-03:00' itemprop="datePublished">2020-06-18</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/iac">Iac</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/terraform">Terraform</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ansible">Ansible</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/packer">Packer</a>
+                    
+                    
+                    <span>&gt;</span>
+                    
+                    <a class="article-category-link" href="https://felipefrizzo.github.io/categories/ci/cd">CI/CD</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<p>Na primeira parte desta série sobre como rodar o <a href="http://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/">gitlab runner e ter alta disponibilidade</a>, falamos sobre as tecnologia empregadas no projeto e também abordamos como utilizar o ansible para fazer a configuração e a instalação do runner e suas dependencias. Agora iremos falar sobre packer e terraform, lembrando você pode acompanhar o código pelo <a href="https://github.com/felipefrizzo/gitlab-runner">repositório</a>.</p>
+
+<h3 id="packer">Packer</h3>
+
+<p>Como já falamos na primeira parte o packer é uma ferramenta para automação da criação de imagens, como por exemplo AMI (Amazon machine images). A estrutura de arquivos do packer é bem simples, é apenas um arquivo json que irá conter as instruções para executar.</p>
+
+<pre><code class="language-shell">❯ tree
+.
+├── README.md
+├── ansible
+├── packer
+│   └── gitlab-runner.json
+└── terraform
+
+11 directories, 8 files
+</code></pre>
+
+<p>No manifesto do packer iremos ter os seguintes seções: <code>variables, builders e provisioners</code></p>
+
+<ul>
+<li>Variables:<br />
+As variáveis permitem parametrizar seus manifestos para que você possa manter tokens secretos, dados específicos do ambiente e outros tipos de informações fora de seus manifestos.<br /></li>
+<li>Builders:<br />
+A seção de builder contém um array com instruções que o packer irá usar para gerar as imagens de máquina.<br /></li>
+<li>Provisioners:<br />
+A seção de provisioners contém um array com instruções que o packer irá usar para instalar e configurar as máquinas antes de transformá-las em imagens.<br /></li>
+</ul>
+
+<p>Segue abaixo o manifesto do packer:</p>
+
+<pre><code class="language-json">{
+ &quot;variables&quot;: {
+   &quot;ssh_username&quot;: &quot;ubuntu&quot;,
+   &quot;profile&quot;: &quot;AWS_PROFILE&quot;,
+   &quot;aws_region&quot;: &quot;us-east-1&quot;,
+   &quot;vpc_id&quot;: &quot;vpc-xxxxxx&quot;,
+   &quot;subnet_id&quot;: &quot;subnet-xxxxxx&quot;,
+   &quot;ami_name&quot;: &quot;ami-gitlab-runner&quot;
+ },
+ &quot;builders&quot;: [
+   {
+     &quot;type&quot;: &quot;amazon-ebs&quot;,
+     &quot;region&quot;: &quot;{{user `aws_region`}}&quot;,
+     &quot;vpc_id&quot;: &quot;{{user `vpc_id`}}&quot;,
+     &quot;subnet_id&quot;: &quot;{{user `subnet_id`}}&quot;,
+     &quot;instance_type&quot;: &quot;t2.small&quot;,
+     &quot;ssh_username&quot;: &quot;{{user `ssh_username`}}&quot;,
+     &quot;ami_virtualization_type&quot;: &quot;hvm&quot;,
+     &quot;ami_name&quot;: &quot;{{user `ami_name`}}-{{isotime | clean_resource_name}}&quot;,
+     &quot;ami_description&quot;: &quot;AMI for run gitlab-runner with docker-machine.&quot;,
+     &quot;ami_regions&quot;: [
+       &quot;{{user `aws_region`}}&quot;
+     ],
+     &quot;source_ami_filter&quot;: {
+       &quot;owners&quot;: [
+         &quot;099720109477&quot;
+       ],
+       &quot;most_recent&quot;: true,
+       &quot;filters&quot;: {
+         &quot;virtualization-type&quot;: &quot;hvm&quot;,
+         &quot;name&quot;: &quot;*ubuntu-bionic-18.04-amd64-server-*&quot;,
+         &quot;root-device-type&quot;: &quot;ebs&quot;
+       }
+     }
+   }
+ ],
+ &quot;provisioners&quot;: [
+   {
+     &quot;type&quot;: &quot;ansible&quot;,
+     &quot;host_alias&quot;: &quot;runner&quot;,
+     &quot;user&quot;: &quot;{{user `ssh_username`}}&quot;,
+     &quot;playbook_file&quot;: &quot;../ansible/playbook_packer.yml&quot;,
+     &quot;ansible_env_vars&quot;: [
+       &quot;ANSIBLE_HOST_KEY_CHECKING=False&quot;,
+       &quot;AWS_PROFILE={{user `profile`}}&quot;
+     ]
+   }
+ ]
+}
+</code></pre>
+
+<p>Na seção de builders nós especificamos qual imagem base queremo utilizar, no nosso caso, a imagem mais recente do ubuntu bionic 18.04, em qual região requeremos criar, o nome final da ami, e algumas informações para que o packer possa subir uma EC2 e executar os provisioners, como vpc_id, subnet_id entre outros.</p>
+
+<p>Na seção de provisioners nós especificamos o que queremos executar e qual o tipo de provisioner, no nosso caso será o ansible, especificamos o caminho do playbook que irá executar, aquele <code>playbook_packer.yml</code> que criamos no post passado.</p>
+
+<p>Para executar e criar a nossa imagem é bem simples, basta executar o seguinte comando:</p>
+
+<pre><code class="language-shell">❯ packer build gitlab-runner.json
+amazon-ebs: output will be in this color.
+
+==&gt; amazon-ebs: Prevalidating any provided VPC information
+==&gt; amazon-ebs: Prevalidating AMI Name: ami-gitlab-runner-2020-06-15T22-16-30Z
+...
+</code></pre>
+
+<h3 id="terraform">Terraform</h3>
+
+<p>Agora que temos o nosso playbook criado, o nosso manifesto packer criado e nossa imagem pronta na AWS, podemos provisionar a infra para que possamos rodar nossos runners. Para fazer os passos a seguir vou presumir que sua infra já estava configurada e tenha vpc’s, subnet’s.</p>
+
+<p>Nossa estrutura de arquivos terraform será a seguinte:</p>
+
+<pre><code class="language-shell">❯ tree
+.
+├── bucket.tf
+├── iam.tf
+├── instance.tf
+├── main.tf
+├── output.tf
+├── security_group.tf
+├── subnet.tf
+├── user_data
+│   └── template.tpl
+├── variables.tf
+└── vpc.tf
+
+1 directory, 10 files
+</code></pre>
+
+<p>Por convenção e boa práticas nós separamos os resources por arquivos, assim facilitando a leitura dos arquivos, abaixo vou descrever os principais resources que utilizaremos para subir nossa infraestrutura.</p>
+
+<p>Primeiro vamos criar um user_data para executar assim que a instância executar e rodar o comando para que o runner se registre no repositório ou na conta do gitlab, esse user_data além de executar o comando para registrar o runner crie antes um template para com algumas informações para que as docker-machines possam ser executadas, são elas, vpc_id, subnet_id, security_group_id entre outros, você pode conferir <a href="https://github.com/felipefrizzo/gitlab-runner/blob/master/terraform/user_data/template.tpl">aqui</a>.</p>
+
+<p>Em seguida nós vamos declarar o resource para subir a instância mestre, a que instância que será responsável por registrar o runner, receber os jobs e executar as docker-machines, essa declaração consiste em um data source para buscar o id da imagem que criamos utilizando o packer, e o resource que é responsável por subir a instância:</p>
+
+<pre><code class="language-hcl">data &quot;aws_ami&quot; &quot;runner&quot; {
+ most_recent = true
+ owners      = [&quot;self&quot;]
+
+ filter {
+   name   = &quot;name&quot;
+   values = [&quot;ami-gitlab-runner-*&quot;]
+ }
+}
+
+resource &quot;aws_instance&quot; &quot;runner&quot; {
+ ami                    = data.aws_ami.runner.id
+ instance_type          = &quot;t3a.small&quot;
+ vpc_security_group_ids = [aws_security_group.runner.id]
+ subnet_id              = element(tolist(data.aws_subnet_ids.public_subnet.ids), 1)
+ key_name               = var.key_name
+ monitoring             = true
+
+ associate_public_ip_address = true
+
+ user_data = data.template_file.runner.rendered
+
+ iam_instance_profile = aws_iam_instance_profile.runner.name
+
+  root_block_device {
+    volume_size = &quot;8&quot;
+    volume_type = &quot;gp2&quot;
+  }
+
+  tags = {
+    Name        = local.project_name
+    ManagedBy   = &quot;Terraform&quot;
+    Environment = var.environment
+  }
+
+  lifecycle {
+    ignore_changes        = [subnet_id]
+    create_before_destroy = true
+  }
+}
+</code></pre>
+
+<p>Após ter todos os resources configurados, agora é só criar um arquivo com a variaveis chamado <code>terraform.tfvars</code>, não se esqueça de nunca mandar esse arquivo para o git. Com esses passos feito agora podemos executar o terraform, com os seguintes comandos:</p>
+
+<p>Primeiro inicializamos o terraform, onde ele vai baixar a dependências:</p>
+
+<pre><code class="language-shell">❯ terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Checking for available provider plugins...
+- Downloading plugin for provider &quot;template&quot; (hashicorp/template) 2.1.2...
+- Downloading plugin for provider &quot;aws&quot; (hashicorp/aws) 2.66.0...
+
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = &quot;...&quot; constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+
+* provider.template: version = &quot;~&gt; 2.1&quot;
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running &quot;terraform plan&quot; to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+</code></pre>
+
+<p>Executamos o &ldquo;plano de ação&rdquo; do terraform, onde ele irá nos mostrar o que ele irá criar, editar e/ou excluir.</p>
+
+<pre><code class="language-shell">❯ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+
+data.aws_region.default: Refreshing state...
+data.aws_vpc.default: Refreshing state...
+data.aws_ami.runner: Refreshing state...
+data.aws_iam_policy_document.runner_role: Refreshing state...
+data.aws_subnet_ids.public_subnet: Refreshing state...
+data.aws_subnet_ids.private_subnet: Refreshing state...
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+ &lt;= read (data resources)
+
+Terraform will perform the following actions:
+
+...
+
+  # aws_instance.runner will be created
+  + resource &quot;aws_instance&quot; &quot;runner&quot; {
+      + ami                          = &quot;ami-0ffca72010b6035f2&quot;
+      + arn                          = (known after apply)
+      + associate_public_ip_address  = true
+      + availability_zone            = (known after apply)
+      + cpu_core_count               = (known after apply)
+      + cpu_threads_per_core         = (known after apply)
+      + get_password_data            = false
+      + host_id                      = (known after apply)
+      + iam_instance_profile         = &quot;post-gitlab-runner-test-instance-profile&quot;
+      + id                           = (known after apply)
+      + instance_state               = (known after apply)
+      + instance_type                = &quot;t3a.small&quot;
+      + ipv6_address_count           = (known after apply)
+      + ipv6_addresses               = (known after apply)
+      + key_name                     = &quot;KEY_PAIR_NAME&quot;
+      + monitoring                   = true
+      + network_interface_id         = (known after apply)
+      + outpost_arn                  = (known after apply)
+      + password_data                = (known after apply)
+      + placement_group              = (known after apply)
+      + primary_network_interface_id = (known after apply)
+      + private_dns                  = (known after apply)
+      + private_ip                   = (known after apply)
+      + public_dns                   = (known after apply)
+      + public_ip                    = (known after apply)
+      + security_groups              = (known after apply)
+      + source_dest_check            = true
+      + subnet_id                    = &quot;subnet-xxxxxx&quot;
+      + tags                         = {
+          + &quot;Environment&quot; = &quot;test&quot;
+          + &quot;ManagedBy&quot;   = &quot;Terraform&quot;
+          + &quot;Name&quot;        = &quot;post-gitlab-runner-test&quot;
+        }
+      + tenancy                      = (known after apply)
+      + user_data                    = (known after apply)
+      + volume_tags                  = (known after apply)
+      + vpc_security_group_ids       = (known after apply)
+
+      + ebs_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + snapshot_id           = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+
+      + ephemeral_block_device {
+          + device_name  = (known after apply)
+          + no_device    = (known after apply)
+          + virtual_name = (known after apply)
+        }
+
+      + metadata_options {
+          + http_endpoint               = (known after apply)
+          + http_put_response_hop_limit = (known after apply)
+          + http_tokens                 = (known after apply)
+        }
+
+      + network_interface {
+          + delete_on_termination = (known after apply)
+          + device_index          = (known after apply)
+          + network_interface_id  = (known after apply)
+        }
+
+      + root_block_device {
+          + delete_on_termination = true
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = 8
+          + volume_type           = &quot;gp2&quot;
+        }
+    }
+
+...
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an &quot;-out&quot; parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+&quot;terraform apply&quot; is subsequently run.
+</code></pre>
+
+<p>Após analisarmos o &ldquo;plano de ação&rdquo; podemos aplicar ele e assim irá criar a nossa infra, e em instantes teremos nosso runner rodando.</p>
+
+<pre><code class="language-shell">❯ terraform apply
+data.aws_region.default: Refreshing state...
+data.aws_vpc.default: Refreshing state...
+data.aws_iam_policy_document.runner_role: Refreshing state...
+data.aws_ami.runner: Refreshing state...
+data.aws_subnet_ids.public_subnet: Refreshing state...
+data.aws_subnet_ids.private_subnet: Refreshing state...
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+ &lt;= read (data resources)
+
+Terraform will perform the following actions:
+
+…
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+</code></pre>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#packer">Packer</a></li>
+<li><a href="#terraform">Terraform</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/terraform">terraform
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ansible">ansible
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/packer">packer
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/ci/cd">ci/cd
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://felipefrizzo.github.io/tags/self-hosted">self-hosted
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    
+    <a href="https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 1&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+</article>
+
+        
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "felipefrizzogithubio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 Felipe Frizzo
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+            <br />
+            <br />
+            <ul class="social">
+                
+<li><a href="//twitter.com/felipefrizzo" class="icon-twitter" target="_blank" title="Twitter"></a></li>
+
+
+
+<li><a href="//facebook.com/felipefrizzo" class="icon-facebook-squared" target="_blank" title="Facebook"></a></li>
+
+
+
+<li><a href="//linkedin.com/in/felipefrizzo" class="icon-linkedin" target="_blank" title="Linkedin"></a></li>
+
+
+
+
+
+
+
+<li><a href="//instagram.com/felipefrizzo" class="icon-instagram" target="_blank" title="Instagram"></a></li>
+
+
+
+<li><a href="//github.com/felipefrizzo" class="icon-github" target="_blank" title="Github"></a></li>
+
+
+
+<li><a href="//plus.google.com/+felipefrizzo" class="icon-gplus" target="_blank" title="Google+"></a></li>
+
+
+<li><a href="https://felipefrizzo.github.iopost/index.xml" class="icon-rss" target="_blank" title="RSS"></a></li>
+            </ul>
+        </div>
+    </div>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-73771834-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

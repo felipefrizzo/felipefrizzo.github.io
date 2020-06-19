@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deploy on Felipe Frizzo</title>
+    <link>https://felipefrizzo.github.io/categories/deploy/</link>
+    <description>Recent content in Deploy on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 12 Jan 2020 20:20:00 -0300</lastBuildDate>
+    
+	<atom:link href="https://felipefrizzo.github.io/categories/deploy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TravisCI para fazer o deploy do seu blog ao GitHub Pages</title>
+      <link>https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/</link>
+      <pubDate>Sun, 12 Jan 2020 20:20:00 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/deploying-github-pages-with-travis/</guid>
+      <description>Travis CI é uma serviço de integração contínua usada para build, testes e deploy de software que estão no GitHub, para projetos open sources pode ser utilizado sem quaisquer cobranças.
+Ao acessar o Travis você terá a opção de ativar determinado repositório e quando o travis estiver ativado o GitHub passará a notificar quando houver novos commits.
+Quando você tiver ativado o repositório no travis, você precisará ter um arquivo chamado .</description>
+    </item>
+    
+  </channel>
+</rss>

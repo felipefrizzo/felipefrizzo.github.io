@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iac on Felipe Frizzo</title>
+    <link>https://felipefrizzo.github.io/categories/iac/</link>
+    <description>Recent content in Iac on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2020 15:15:32 -0300</lastBuildDate>
+    
+	<atom:link href="https://felipefrizzo.github.io/categories/iac/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 2</title>
+      <link>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/</link>
+      <pubDate>Thu, 18 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-2/</guid>
+      <description>Na primeira parte desta série sobre como rodar o gitlab runner e ter alta disponibilidade, falamos sobre as tecnologia empregadas no projeto e também abordamos como utilizar o ansible para fazer a configuração e a instalação do runner e suas dependencias. Agora iremos falar sobre packer e terraform, lembrando você pode acompanhar o código pelo repositório.
+Packer Como já falamos na primeira parte o packer é uma ferramenta para automação da criação de imagens, como por exemplo AMI (Amazon machine images).</description>
+    </item>
+    
+    <item>
+      <title>Gitlab Runner de alta disponibilidade rodando na sua infraestrutura - Parte 1</title>
+      <link>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/</link>
+      <pubDate>Mon, 15 Jun 2020 15:15:32 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/self-hosted-gitlab-runner-with-iac-part-1/</guid>
+      <description>Neste artigo irei abordar como rodar os runners do gitlab na sua infraestrutura tendo alta disponibilidade e tudo isso com código usando ansible, packer e terraform. Este artigo será dividido em duas partes onde nessa primeira parte irei contextualizar as ferramentas citadas acima e num próximo post onde iremos colocar a mão na massa.
+Gitlab Runner O gitlab-runner é um projeto open-source escrito em golang que é usado para rodar os jobs (pipelines) e enviar o resultado para o gitlab.</description>
+    </item>
+    
+  </channel>
+</rss>

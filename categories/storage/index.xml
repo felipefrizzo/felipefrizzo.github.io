@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Storage on Felipe Frizzo</title>
+    <link>https://felipefrizzo.github.io/categories/storage/</link>
+    <description>Recent content in Storage on Felipe Frizzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jan 2020 11:02:27 -0300</lastBuildDate>
+    
+	<atom:link href="https://felipefrizzo.github.io/categories/storage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Como diminuir o tamanho do volume raiz do EC2</title>
+      <link>https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/</link>
+      <pubDate>Wed, 29 Jan 2020 11:02:27 -0300</pubDate>
+      
+      <guid>https://felipefrizzo.github.io/post/reduce-aws-ebs-root-volume-size/</guid>
+      <description>Os volumes EBS (Elastic Block Store) da Amazon são fáceis de usar e expandir, mas são difíceis de diminuir quando o tamanho aumenta. Aqui vou deixar um dica de como diminuir o tamanho do EBS. Eu vou assumir que você queira diminuir o volume raiz da sua EC2.
+Primeiramente você vai precisar parar a instância que deseja fazer a alteração no tamanho do disco. Após essa etapa crie um snapshot do atual volume e crie um volume do tipo General Purpose SSD a partir deste snapshot.</description>
+    </item>
+    
+  </channel>
+</rss>
